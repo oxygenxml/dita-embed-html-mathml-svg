@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0"
-    xmlns:relpath="http://www.oxygenxml/relpathutils"
     xmlns:custom-func="http://www.oxygenxml.com/custom/function"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
+    exclude-result-prefixes="custom-func xs dita-ot"
   >
   
   <xsl:param name="ditaTempDir"/>
-  
-  <!-- Test whether URI is absolute -->
-  <xsl:function name="custom-func:isAbsolute" as="xs:boolean">
-    <xsl:param name="uri" as="xs:anyURI"/>
-    <xsl:sequence select="some $prefix in ('/', 'file:') satisfies starts-with($uri, $prefix) or
-      contains($uri, '://')"/>
-  </xsl:function>
-  
   <xsl:function name="custom-func:getParent" as="xs:string">
     <xsl:param name="sourcePath" as="xs:string"/>
     <xsl:variable name="correctedSourcePath" select="replace($sourcePath, '\\', '/')"/>
@@ -126,7 +119,7 @@
       "/>
   </xsl:function>
   
-  <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.mml') or ends-with(@href, '.mathml') or (ends-with(@href, '.svg') and (contains(@outputclass, 'embed')))][not(@scope = 'external')]">
+  <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.mml') or ends-with(@href, '.mathml')][not(@scope = 'external')]">
     <xsl:variable name="job" select="document(resolve-uri('.job.xml', custom-func:toURL(concat($ditaTempDir, '/'))))" as="document-node()?"/>
     <xsl:variable name="xmlRelativeToBase" select="custom-func:getRelativePath(custom-func:toURL(concat($ditaTempDir, '/')), base-uri())"/>
     <xsl:variable name="xmlOriginalLocation" select="$job//file[@uri=$xmlRelativeToBase]/@src" as="xs:string"/>
@@ -139,6 +132,18 @@
         <xsl:next-match/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.svg') and (contains(@outputclass, 'embed'))][not(@scope = 'external')]">
+    <xsl:message>AAA <xsl:copy-of select="."/></xsl:message>
+    <object type="image/svg+xml" data="{@href}" xmlns="http://www.w3.org/1999/xhtml">
+      <xsl:if test="@dita-ot:image-width">
+        <xsl:attribute name="width" select="@dita-ot:image-width"/>
+      </xsl:if>
+      <xsl:if test="@dita-ot:image-height">
+        <xsl:attribute name="height" select="@dita-ot:image-height"/>
+      </xsl:if>
+    </object>
   </xsl:template>
   
 </xsl:stylesheet>
