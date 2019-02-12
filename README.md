@@ -10,3 +10,9 @@ The plugin was tested using DITA Open Toolkit 3.2.1 and it aims to solve two use
 The "samples" folder contains a DITA topic with two referenced images (MathML and SVG) and can be used to test that the plugin works.
 
 The plugin uses XSLT utility functions copied from the DITA Community plugins developed by Eliot Kimber: https://github.com/dita-community/org.dita-community.common.xslt
+
+Copyright and License
+---------------------
+Copyright 2018 Syncro Soft SRL.
+
+This project is licensed under [Apache License 2.0](https://github.com/oxygenxml/dita-embed-html-mathml-svg/blob/master/LICENSE)
