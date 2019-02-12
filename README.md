@@ -5,7 +5,7 @@ The plugin was tested using DITA Open Toolkit 3.2.1 and it aims to solve two use
 
 1. When a DITA topic has an image reference to a MathML document, when publishing to HTML-based outputs in order to have the MathML content properly rendered in the Web Browser the reference to the MathML document needs to be expanded in-place in the HTML output. In web browsers other than Firefox the MathJax Javscript libraries also need to be referenced in the HTML document header: https://www.oxygenxml.com/doc/versions/20.1/ug-editor/topics/mathjax-webhelp-x-modes2.html
 
-1. When a DITA topic has an image reference to an SVG and the SVG document contains animation (custom Javascript code) in order for the animation to properly work in the web browser, the SVG content needs to be expanded in-place in the HTML document. Setting the **@outputclass='embed'** attribute on the DITA **image** reference will triggeer this in-place expansion of the SVG in the HTML document.
+1. When a DITA topic has an image reference to an SVG and the SVG document contains animation (custom Javascript code) in order for the animation to properly work in the web browser, the SVG needs to be referenced in the HTML document using the **object** HTML element. You need to set the **@outputclass='embed'** attribute on the DITA **image** reference in order to explicitly do this.
 
 The "samples" folder contains a DITA topic with two referenced images (MathML and SVG) and can be used to test that the plugin works.
 
