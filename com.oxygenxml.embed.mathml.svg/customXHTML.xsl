@@ -135,7 +135,6 @@
   </xsl:template>
   
   <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.svg') and (contains(@outputclass, 'embed'))][not(@scope = 'external')]">
-    <xsl:message>AAA <xsl:copy-of select="."/></xsl:message>
     <object type="image/svg+xml" data="{@href}" xmlns="http://www.w3.org/1999/xhtml">
       <xsl:if test="@dita-ot:image-width">
         <xsl:attribute name="width" select="@dita-ot:image-width"/>
