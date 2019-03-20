@@ -136,13 +136,43 @@
   
   <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.svg') and (contains(@outputclass, 'embed'))][not(@scope = 'external')]">
     <object type="image/svg+xml" data="{@href}" xmlns="http://www.w3.org/1999/xhtml">
-      <xsl:if test="@dita-ot:image-width">
-        <xsl:attribute name="width" select="@dita-ot:image-width"/>
-      </xsl:if>
-      <xsl:if test="@dita-ot:image-height">
-        <xsl:attribute name="height" select="@dita-ot:image-height"/>
+      <xsl:if test="@scale">
+        <xsl:variable name="width" select="@dita-ot:image-width"/>
+        <xsl:variable name="height" select="@dita-ot:image-height"/>
+        <xsl:if test="not(@width) and not(@height)">
+          <xsl:attribute name="height" select="custom-func:scaleDimension($height, @scale)"/>
+          <xsl:attribute name="width" select="custom-func:scaleDimension($width, @scale)"/>
+        </xsl:if>
       </xsl:if>
     </object>
   </xsl:template>
   
+  <xsl:function name="custom-func:scaleDimension" as="xs:string">
+    <xsl:param name="dimension"/>
+    <xsl:param name="scale"/>
+    <xsl:variable name="dimensionNumber">
+      <xsl:choose>
+        <xsl:when test="custom-func:hasMeasuringUnit($dimension)">
+          <xsl:value-of select="substring($dimension, 0, string-length($dimension) - 2)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$dimension"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="dimensionMeasuringUnit">
+      <xsl:choose>
+        <xsl:when test="custom-func:hasMeasuringUnit($dimension)">
+          <xsl:value-of select="substring($dimension, string-length($dimension) - 1)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:value-of select="concat(floor((number($dimensionNumber) * number($scale)) div 100), $dimensionMeasuringUnit)"/>
+  </xsl:function>
+  
+  <xsl:function name="custom-func:hasMeasuringUnit" as="xs:boolean">
+    <xsl:param name="dimension"/>
+    <xsl:value-of select="ends-with($dimension, 'mm') or ends-with($dimension, 'cm') 
+      or ends-with($dimension, 'em') or ends-with($dimension, 'ex') or ends-with($dimension, 'px')"/>
+  </xsl:function>
 </xsl:stylesheet>
