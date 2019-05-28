@@ -2,7 +2,6 @@
 <plugin id="com.oxygenxml.embed.mathml.svg">
   <feature extension="package.support.name" value="Oxygen XML Editor Support"/>
   <feature extension="package.support.email" value="support@oxygenxml.com"/>
-  <feature extension="package.version" value="21.0"/>
   <feature extension="dita.xsl.xhtml" value="customXHTML.xsl" type="file"/>
   <feature extension="dita.xsl.html5" value="customXHTML.xsl" type="file"/>
   <feature extension="dita.conductor.xhtml.param" value="localFunctionsParams.xml" type="file"/>
