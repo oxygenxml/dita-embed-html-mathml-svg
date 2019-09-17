@@ -25,8 +25,10 @@
     <xsl:variable name="fileUrl" as="xs:string"
       select="
       if (matches($url, '^[a-zA-Z]:'))
-      then concat('file:/', $url)
-      else $url
+       then concat('file:/', $url)
+      else 
+        if (starts-with($url, '/')) 
+        then concat('file:', $url) else $url
       "
     />
     <xsl:sequence select="$fileUrl"/>
