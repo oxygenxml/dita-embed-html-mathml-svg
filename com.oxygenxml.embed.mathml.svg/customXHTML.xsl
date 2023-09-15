@@ -6,7 +6,7 @@
     xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
     exclude-result-prefixes="custom-func xs dita-ot"
   >
-  
+  <xsl:param name="transtype"/>
   <xsl:param name="ditaTempDir"/>
   <xsl:function name="custom-func:getParent" as="xs:string">
     <xsl:param name="sourcePath" as="xs:string"/>
@@ -136,7 +136,7 @@
     </xsl:choose>
   </xsl:template>
   
-  <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.svg') and (contains(@outputclass, 'embed'))][not(@scope = 'external')]">
+  <xsl:template match="*[contains(@class, ' topic/image ')][ends-with(@href, '.svg') and (contains(@outputclass, 'embed'))][not(@scope = 'external')][not($transtype='pdf-css-html5')]">
     <object type="image/svg+xml" data="{@href}" xmlns="http://www.w3.org/1999/xhtml">
       <xsl:if test="@scale">
         <xsl:variable name="width" select="@dita-ot:image-width"/>
