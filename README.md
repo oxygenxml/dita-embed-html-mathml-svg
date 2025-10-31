@@ -1,7 +1,7 @@
 # dita-embed-html-mathml-svg
-DITA Open Toolkit plugin which allows you to embed referenced MathML and SVG images in the HTML5 and XHTML output.
+DITA Open Toolkit plugin which allows you to embed referenced MathML and SVG images in the HTML5 (including WebHelp Responsive) and XHTML output.
 
-The plugin was tested using DITA Open Toolkit 3.2.1 and it aims to solve two use cases:
+The plugin was tested using DITA Open Toolkit 4.3.5 and it aims to solve two use cases:
 
 1. When a DITA topic has an image reference to a MathML document, when publishing to HTML-based outputs in order to have the MathML content properly rendered in the Web Browser the reference to the MathML document needs to be expanded in-place in the HTML output. In web browsers other than Firefox the MathJax Javscript libraries also need to be referenced in the HTML document header: https://www.oxygenxml.com/doc/versions/20.1/ug-editor/topics/mathjax-webhelp-x-modes2.html
 
@@ -13,6 +13,6 @@ The plugin uses XSLT utility functions copied from the DITA Community plugins de
 
 Copyright and License
 ---------------------
-Copyright 2019 Syncro Soft SRL.
+Copyright 2025 Syncro Soft SRL.
 
 This project is licensed under [Apache License 2.0](https://github.com/oxygenxml/dita-embed-html-mathml-svg/blob/master/LICENSE)
