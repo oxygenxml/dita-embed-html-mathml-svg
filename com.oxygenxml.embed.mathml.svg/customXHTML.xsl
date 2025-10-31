@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="2.0"
-    xmlns:custom-func="http://www.oxygenxml.com/custom/function"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:custom-func="http://www.oxygenxml.com/custom/function"
     xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
     exclude-result-prefixes="custom-func xs dita-ot"
-  >
+    version="3.0">
+  
   <xsl:param name="transtype"/>
   <xsl:param name="ditaTempDir"/>
   <xsl:function name="custom-func:getParent" as="xs:string">
@@ -174,7 +174,7 @@
   
   <xsl:function name="custom-func:hasMeasuringUnit" as="xs:boolean">
     <xsl:param name="dimension"/>
-    <xsl:value-of select="ends-with($dimension, 'mm') or ends-with($dimension, 'cm') 
+    <xsl:sequence select="ends-with($dimension, 'mm') or ends-with($dimension, 'cm') 
       or ends-with($dimension, 'em') or ends-with($dimension, 'ex') or ends-with($dimension, 'px')"/>
   </xsl:function>
 </xsl:stylesheet>
